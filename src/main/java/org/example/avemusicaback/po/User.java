@@ -49,7 +49,9 @@ public class User {
     @Column(name = "address")
     private String address;
 
-
+    @Basic
+    @Column(name = "sex")
+    private String sex;
 
 
 
@@ -60,6 +62,7 @@ public class User {
     public UserVO toVO(){
         UserVO userVO=new UserVO();
         userVO.setId(this.id);
+        userVO.setSex(this.sex);
         userVO.setAddress(this.address);
         userVO.setUsername(this.username);
 

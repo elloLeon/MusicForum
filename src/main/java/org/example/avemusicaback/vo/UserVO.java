@@ -30,12 +30,14 @@ public class UserVO {
 
     private String nickname;
 
+    private String sex;
 
 
 
     public User toPO(){
         User user=new User();
         user.setId(this.id);
+        user.setSex(this.sex);
         user.setAddress(this.address);
         user.setUsername(this.username);
         user.setTelephone(this.telephone);
