@@ -33,13 +33,8 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             throw AveMusicaException.userAlreadyExists();
         }
-
         User newUser = userVO.toPO();
-        //进行注册时密码的加密
-        newUser.setPassword(newUser.getPassword());
-
         newUser.setCreateTime(new Date());
-
         userRepository.save(newUser);
         return true;
     }

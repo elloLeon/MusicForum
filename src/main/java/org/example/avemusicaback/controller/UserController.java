@@ -1,5 +1,6 @@
 package org.example.avemusicaback.controller;
 
+import org.example.avemusicaback.service.UserService;
 import org.example.avemusicaback.serviceImpl.UserServiceImpl;
 import org.example.avemusicaback.vo.ResultVO;
 import org.example.avemusicaback.vo.UserVO;
@@ -14,10 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:8060") // 允许的源
 public class UserController {
 
     @Autowired
-    UserServiceImpl userService;
+    UserService userService;
 
 
     @PostMapping("/register")
