@@ -1,5 +1,6 @@
 package org.example.avemusicaback.serviceImpl;
 
+import org.example.avemusicaback.Util.SecurityUtil;
 import org.example.avemusicaback.Util.TokenUtil;
 import org.example.avemusicaback.exception.AveMusicaException;
 import org.example.avemusicaback.po.User;
@@ -23,8 +24,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     TokenUtil tokenUtil;
 
-
-
+    @Autowired
+    SecurityUtil securityUtil;
 
     @Override
     public Boolean register(UserVO userVO) {
@@ -40,24 +41,24 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public String login(String username, String password) {
         User user = userRepository.findByUsername(username);
-        if (user==null){
-            throw  AveMusicaException.UserNotExist();
+        if (user == null) {
+            throw AveMusicaException.UserNotExist();
         }
-        String storedPassword=user.getPassword();
-        if (storedPassword.equals(password ) ){
+        String Password = user.getPassword();
+        if (Password.equals(password)) {
             return tokenUtil.getToken(user);
-        }else {
+        } else {
             throw AveMusicaException.usernameOrPasswordError();
         }
     }
 
     @Override
     public UserVO getInformation() {
-        return null;
+        User user = securityUtil.getCurrentUser();
+        return user.toVO();
     }
 
     @Override
@@ -75,8 +76,6 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user) {
         return userRepository.save(user);
     }
-
-
 
 
 }
