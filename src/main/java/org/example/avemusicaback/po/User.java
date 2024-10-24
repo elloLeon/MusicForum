@@ -27,6 +27,10 @@ public class User {
     private String username;
 
     @Basic
+    @Column(name = "imgURL")
+    private String imgURL;
+
+    @Basic
     @Column(name = "telephone")
     private String telephone;
 
@@ -62,10 +66,10 @@ public class User {
     public UserVO toVO(){
         UserVO userVO=new UserVO();
         userVO.setId(this.id);
+        userVO.setImgURL(this.imgURL);
         userVO.setSex(this.sex);
         userVO.setAddress(this.address);
         userVO.setUsername(this.username);
-
         userVO.setTelephone(this.telephone);
         userVO.setPassword(this.password);
         userVO.setCreateTime(this.createTime);

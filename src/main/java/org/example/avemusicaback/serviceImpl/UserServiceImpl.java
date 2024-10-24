@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService {
         }
         User newUser = userVO.toPO();
         newUser.setCreateTime(new Date());
+        newUser.setImgURL("");
         userRepository.save(newUser);
         return true;
     }
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO getInformation() {
         User user = securityUtil.getCurrentUser();
-        System.out.println(user.getNickName());
+        //System.out.println(user.getNickName());
         return user.toVO();
     }
 
@@ -80,6 +81,10 @@ public class UserServiceImpl implements UserService {
         }
         if (userVO.getNickname()!=null){
             user.setNickName(userVO.getNickname());
+        }
+        if (userVO.getImgURL()!=null)
+        {
+            user.setImgURL(userVO.getImgURL());
         }
         userRepository.save(user);
         return true;

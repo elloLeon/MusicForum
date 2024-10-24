@@ -18,6 +18,8 @@ public class UserVO {
 
     private String username;
 
+    private String imgURL;
+
     private String telephone;
 
     private String password;
@@ -38,6 +40,7 @@ public class UserVO {
         User user=new User();
         user.setId(this.id);
         user.setSex(this.sex);
+        user.setImgURL(this.imgURL);
         user.setAddress(this.address);
         user.setUsername(this.username);
         user.setTelephone(this.telephone);
