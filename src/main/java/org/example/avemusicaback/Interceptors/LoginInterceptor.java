@@ -21,7 +21,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         System.out.println(token);
         if (token != null && tokenUtil.verifyToken(token)) {
             request.getSession().setAttribute("currentUser", tokenUtil.getUser(token));
-
+            System.out.println(token);
             return true;
 
         } else {

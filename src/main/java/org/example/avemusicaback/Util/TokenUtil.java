@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Component
 public class TokenUtil {
-    private static final long EXPIRE_TIME = 24 * 60 * 60 * 1000;
+    private static final long EXPIRE_TIME = 3 * 60 * 60 * 1000;
 
     @Autowired
     UserRepository userRepository;

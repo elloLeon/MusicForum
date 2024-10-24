@@ -58,12 +58,31 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO getInformation() {
         User user = securityUtil.getCurrentUser();
+        System.out.println(user.getNickName());
         return user.toVO();
     }
 
     @Override
     public Boolean updateInformation(UserVO userVO) {
-        return null;
+        User user=securityUtil.getCurrentUser();
+        if (userVO.getTelephone()!=null){
+            user.setTelephone(userVO.getTelephone());
+        }
+        if (userVO.getUsername()!=null){
+            user.setUsername(userVO.getUsername());
+        }
+        if (userVO.getAddress()!=null){
+            user.setAddress(userVO.getAddress());
+        }
+        if (userVO.getSex()!=null){
+            user.setSex(userVO.getSex());
+        }
+        if (userVO.getNickname()!=null){
+            user.setNickName(userVO.getNickname());
+        }
+        userRepository.save(user);
+        return true;
+
     }
 
     @Override
