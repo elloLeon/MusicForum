@@ -21,4 +21,5 @@ public interface UserService {
 
     User saveUser(User user);
 
+    Boolean changePassword(String oldPassword, String newPassword);
 }

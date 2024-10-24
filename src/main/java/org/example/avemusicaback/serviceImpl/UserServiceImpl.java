@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -97,4 +98,16 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
+    public Boolean changePassword(String oldPassword, String newPassword) {
+
+        User user = securityUtil.getCurrentUser();
+        if (!Objects.equals(user.getPassword(), oldPassword))
+        {
+            return false;
+        }
+        user.setPassword(newPassword);
+        userRepository.save(user);
+        return true;
+    }
 }

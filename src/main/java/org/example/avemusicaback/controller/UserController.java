@@ -44,6 +44,11 @@ public class UserController {
         return ResultVO.buildSuccess(userService.updateInformation(userVO));
     }
 
+    @PostMapping("/changePassword")
+    public ResultVO<Boolean> changePassword(@RequestParam("oldPassword")String oldPassword,
+                                            @RequestParam("newPassword")String newPassword){
+        return ResultVO.buildSuccess(userService.changePassword(oldPassword,newPassword));
 
+    }
 
 }
