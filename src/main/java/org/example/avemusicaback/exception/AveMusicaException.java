@@ -8,7 +8,10 @@ public class AveMusicaException extends RuntimeException{
     public static AveMusicaException userAlreadyExists(){
         return new AveMusicaException("用户已经存在!");
     }
-
+    public static AveMusicaException fileUploadFail()
+    {
+        return new AveMusicaException("文件上传失败！");
+    }
     public static AveMusicaException notLogin(){
         return new AveMusicaException("未登录!");
     }
