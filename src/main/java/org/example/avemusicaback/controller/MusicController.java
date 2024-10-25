@@ -8,6 +8,9 @@ import org.example.avemusicaback.vo.MusicVO;
 import org.example.avemusicaback.vo.ResultVO;
 import org.example.avemusicaback.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,13 +26,21 @@ public class MusicController {
         return ResultVO.buildSuccess(ossService.upload(file));
     }
 
-    @GetMapping
-    public ResultVO<MusicVO> getInformation(){
-        return ResultVO.buildSuccess(musicService.getInformation());
-    }
+//    @GetMapping
+//    public ResultVO<MusicVO> getInformation(){
+//        return ResultVO.buildSuccess(musicService.getInformation());
+//    }
 
     @PostMapping("/addMusic")
     public ResultVO<Boolean> addMusic(@RequestBody MusicVO musicVO){
         return ResultVO.buildSuccess(musicService.addMusic(musicVO));
+    }
+
+    @GetMapping
+    public ResultVO <Page<MusicVO>> getMusics(@RequestParam(defaultValue = "0") int page,
+                                              @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        return  ResultVO.buildSuccess(musicService.getAllMusic(pageable)) ;
     }
 }
