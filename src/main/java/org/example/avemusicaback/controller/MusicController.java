@@ -1,0 +1,35 @@
+package org.example.avemusicaback.controller;
+
+
+import org.example.avemusicaback.po.Music;
+import org.example.avemusicaback.service.MusicService;
+import org.example.avemusicaback.service.OssService;
+import org.example.avemusicaback.vo.MusicVO;
+import org.example.avemusicaback.vo.ResultVO;
+import org.example.avemusicaback.vo.UserVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+@RestController
+@RequestMapping("/api/musics")
+public class MusicController {
+    @Autowired
+    OssService ossService;
+    @Autowired
+    MusicService musicService;
+    @PostMapping("/uploadMusic")
+    public ResultVO<String> upload(@RequestParam MultipartFile file){
+        return ResultVO.buildSuccess(ossService.upload(file));
+    }
+
+    @GetMapping
+    public ResultVO<MusicVO> getInformation(){
+        return ResultVO.buildSuccess(musicService.getInformation());
+    }
+
+    @PostMapping("/addMusic")
+    public ResultVO<Boolean> addMusic(@RequestBody MusicVO musicVO){
+        return ResultVO.buildSuccess(musicService.addMusic(musicVO));
+    }
+}

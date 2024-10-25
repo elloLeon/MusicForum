@@ -21,6 +21,7 @@ public class OssServiceImpl implements OssService {
 
     @Override
     public String upload(MultipartFile file) {
+        System.out.println("423423424234234324234234324");
         try {
             String fileName = UUID.randomUUID().toString().replace("-","");
             String original = file.getOriginalFilename();
