@@ -38,6 +38,14 @@ public class Music {
     @Column(name="musicurl")
     private String musicUrl;
 
+    @Basic
+    @Column(name="imgurl")
+    private String imgUrl;
+
+    @Basic
+    @Column(name="createTime")
+    private String createTime;
+
     public MusicVO toVO(){
         MusicVO musicVO = new MusicVO();
         musicVO.setId(this.id);
@@ -45,6 +53,8 @@ public class Music {
         musicVO.setMusicUrl(this.musicUrl);
         musicVO.setUsername(this.username);
         musicVO.setDescription(this.description);
+        musicVO.setCreateTime(this.createTime);
+        musicVO.setImgUrl(this.imgUrl);
         return musicVO;
     }
 

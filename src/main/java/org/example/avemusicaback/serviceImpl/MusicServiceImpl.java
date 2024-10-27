@@ -1,6 +1,8 @@
 package org.example.avemusicaback.serviceImpl;
 
+import org.example.avemusicaback.Util.SecurityUtil;
 import org.example.avemusicaback.po.Music;
+import org.example.avemusicaback.po.User;
 import org.example.avemusicaback.repository.MusicRepository;
 import org.example.avemusicaback.service.MusicService;
 import org.example.avemusicaback.vo.MusicVO;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +24,8 @@ import java.util.stream.Collectors;
 public class MusicServiceImpl implements MusicService {
     @Autowired
     MusicRepository musicRepository;
+    @Autowired
+    SecurityUtil securityUtil;
     @Override
     public MusicVO getInformation() {
 
@@ -30,6 +35,10 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public Boolean addMusic(MusicVO musicVO) {
         Music music = musicVO.toPO();
+        User user = securityUtil.getCurrentUser();
+        music.setUsername(user.getUsername());
+        music.setImgUrl(user.getImgURL());
+        music.setCreateTime(String.valueOf(new Date()));
         musicRepository.save(music);
         return true;
     }

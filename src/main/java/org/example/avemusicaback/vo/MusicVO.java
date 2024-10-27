@@ -15,7 +15,8 @@ public class MusicVO {
         private String username;
         private String description;
         private String musicUrl;
-
+        private String imgUrl;
+        private String createTime;
         public Music toPO()
         {
             Music music = new Music();
@@ -25,6 +26,8 @@ public class MusicVO {
             music.setUsername(this.username);
             music.setAuthor(this.author);
             music.setDescription(this.description);
+            music.setCreateTime(this.createTime);
+            music.setImgUrl(this.imgUrl);
             return music;
         }
 }
