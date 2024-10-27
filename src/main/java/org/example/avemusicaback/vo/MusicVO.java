@@ -28,6 +28,7 @@ public class MusicVO {
             music.setDescription(this.description);
             music.setCreateTime(this.createTime);
             music.setImgUrl(this.imgUrl);
+            music.setCreateTime(this.createTime);
             return music;
         }
 }

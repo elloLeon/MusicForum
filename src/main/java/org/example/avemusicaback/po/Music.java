@@ -55,6 +55,7 @@ public class Music {
         musicVO.setDescription(this.description);
         musicVO.setCreateTime(this.createTime);
         musicVO.setImgUrl(this.imgUrl);
+        musicVO.setCreateTime(this.createTime);
         return musicVO;
     }
 
