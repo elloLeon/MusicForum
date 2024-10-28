@@ -58,7 +58,15 @@ public class User {
     private String sex;
 
 
+    @ManyToMany(mappedBy = "followings")
+    private Set<User> followers = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_followers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "follower_id"))
+    private Set<User> followings = new HashSet<>();
 
 
 

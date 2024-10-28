@@ -22,4 +22,10 @@ public interface UserService {
     User saveUser(User user);
 
     Boolean changePassword(String oldPassword, String newPassword);
+
+    Boolean followUser(Integer followerId, Integer followedId);
+    List<User> getFollowings(Integer userId);
+    List<User> getFollowers(Integer userId);
+    Boolean unfollowUser(Integer followerId, Integer followedId);
+
 }

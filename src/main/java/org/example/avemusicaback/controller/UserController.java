@@ -1,5 +1,6 @@
 package org.example.avemusicaback.controller;
 
+import org.example.avemusicaback.po.User;
 import org.example.avemusicaback.service.UserService;
 import org.example.avemusicaback.serviceImpl.UserServiceImpl;
 import org.example.avemusicaback.vo.ResultVO;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -39,7 +41,7 @@ public class UserController {
         return ResultVO.buildSuccess(userService.getInformation());
     }
 
-    @PostMapping
+    @PostMapping("/update")
     public ResultVO<Boolean> updateInformation(@RequestBody UserVO userVO){
         return ResultVO.buildSuccess(userService.updateInformation(userVO));
     }
@@ -49,6 +51,25 @@ public class UserController {
                                             @RequestParam("newPassword")String newPassword){
         return ResultVO.buildSuccess(userService.changePassword(oldPassword,newPassword));
 
+    }
+    @PostMapping("/follow")
+    public ResultVO<Boolean> follow(@RequestParam("followerId") Integer followerId, @RequestParam("followedId") Integer followedId) {
+        return ResultVO.buildSuccess(userService.followUser(followerId, followedId));
+    }
+
+    @DeleteMapping("/unfollow")
+    public ResultVO<Boolean> unfollow(@RequestParam("followerId") Integer followerId, @RequestParam("followedId") Integer followedId) {
+        return ResultVO.buildSuccess( userService.unfollowUser(followerId, followedId));
+    }
+
+    @GetMapping("/following")
+    public ResultVO<List<User>> getFollowing(@RequestParam("id") Integer id) {
+        return ResultVO.buildSuccess(  userService.getFollowings(id));
+    }
+
+    @GetMapping("/followers")
+    public ResultVO<List<User>> getFollowers(@RequestParam("id")Integer id) {
+        return   ResultVO.buildSuccess( userService.getFollowers(id));
     }
 
 }

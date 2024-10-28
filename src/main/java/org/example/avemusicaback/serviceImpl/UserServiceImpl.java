@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean register(UserVO userVO) {
-        User user = userRepository.findByUsername(userVO.getUsername());
+        User user = userRepository.findUserByTelephone(userVO.getTelephone());
 
         if (user != null) {
             throw AveMusicaException.userAlreadyExists();
@@ -114,5 +115,37 @@ public class UserServiceImpl implements UserService {
         user.setPassword(newPassword);
         userRepository.save(user);
         return true;
+    }
+    @Override
+    public Boolean followUser(Integer followerId, Integer followedId) {
+        User follower = userRepository.findById(followerId).orElseThrow();
+        User followed = userRepository.findById(followedId).orElseThrow();
+
+        follower.getFollowings().add(followed);
+        followed.getFollowers().add(follower);
+
+        userRepository.save(follower);
+        userRepository.save(followed);
+        return true;
+    }
+    @Override
+    public Boolean unfollowUser(Integer followerId, Integer followedId) {
+        User follower = userRepository.findById(followerId).orElseThrow();
+        User followed = userRepository.findById(followedId).orElseThrow();
+
+        follower.getFollowings().remove(followed);
+        followed.getFollowers().remove(follower);
+
+        userRepository.save(follower);
+        userRepository.save(followed);
+        return true;
+    }
+    @Override
+    public List<User> getFollowings(Integer userId) {
+        return new ArrayList<>(userRepository.findById(userId).orElseThrow().getFollowings());
+    }
+    @Override
+    public List<User> getFollowers(Integer userId) {
+        return new ArrayList<>(userRepository.findById(userId).orElseThrow().getFollowers());
     }
 }

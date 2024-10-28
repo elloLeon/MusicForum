@@ -9,6 +9,9 @@ import org.example.avemusicaback.po.User;
 
 import java.util.Date;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,6 +36,8 @@ public class UserVO {
     private String nickname;
 
     private String sex;
+    private Set<Integer> followers = new HashSet<>(); // 粉丝列表
+    private Set<Integer> following = new HashSet<>();
 
 
 
@@ -47,6 +52,8 @@ public class UserVO {
         user.setPassword(this.password);
         user.setCreateTime(this.createTime);
         user.setNickName(this.nickname);
+
         return user;
     }
 }
+
