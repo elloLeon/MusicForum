@@ -12,6 +12,7 @@ import java.util.List;
 public interface UserService {
     Boolean register(UserVO userVO);
 
+    User getConcernInfo(String username);
     String login(String phone,String password);
 
     UserVO getInformation();

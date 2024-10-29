@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public User getConcernInfo(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 
     @Override
     public String login(String username, String password) {

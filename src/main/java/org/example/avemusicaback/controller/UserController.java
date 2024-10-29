@@ -72,4 +72,9 @@ public class UserController {
         return   ResultVO.buildSuccess( userService.getFollowers(id));
     }
 
+    @GetMapping("/getConcernInfo")
+    public ResultVO<User> getConcernInfo(@RequestParam("username")String username){
+        return ResultVO.buildSuccess(userService.getConcernInfo(username));
+    }
+
 }
