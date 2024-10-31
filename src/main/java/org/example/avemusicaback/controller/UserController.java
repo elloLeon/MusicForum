@@ -57,18 +57,18 @@ public class UserController {
         return ResultVO.buildSuccess(userService.followUser(followerId, followedId));
     }
 
-    @DeleteMapping("/unfollow")
+    @PostMapping("/unfollow")
     public ResultVO<Boolean> unfollow(@RequestParam("followerId") Integer followerId, @RequestParam("followedId") Integer followedId) {
         return ResultVO.buildSuccess( userService.unfollowUser(followerId, followedId));
     }
 
     @GetMapping("/following")
-    public ResultVO<List<User>> getFollowing(@RequestParam("id") Integer id) {
+    public ResultVO<List<Integer>> getFollowing(@RequestParam("id") Integer id) {
         return ResultVO.buildSuccess(  userService.getFollowings(id));
     }
 
     @GetMapping("/followers")
-    public ResultVO<List<User>> getFollowers(@RequestParam("id")Integer id) {
+    public ResultVO<List<Integer>> getFollowers(@RequestParam("id")Integer id) {
         return   ResultVO.buildSuccess( userService.getFollowers(id));
     }
 

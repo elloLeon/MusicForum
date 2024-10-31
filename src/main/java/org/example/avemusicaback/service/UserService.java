@@ -25,8 +25,8 @@ public interface UserService {
     Boolean changePassword(String oldPassword, String newPassword);
 
     Boolean followUser(Integer followerId, Integer followedId);
-    List<User> getFollowings(Integer userId);
-    List<User> getFollowers(Integer userId);
+    List<Integer> getFollowings(Integer userId);
+    List<Integer> getFollowers(Integer userId);
     Boolean unfollowUser(Integer followerId, Integer followedId);
 
 }

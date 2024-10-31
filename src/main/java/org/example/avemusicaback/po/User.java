@@ -58,15 +58,17 @@ public class User {
     private String sex;
 
 
-    @ManyToMany(mappedBy = "followings")
-    private Set<User> followers = new HashSet<>();
+    // 只存储关注的用户的ID
+    @ElementCollection
+    @CollectionTable(name = "user_followings_ids", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "follower_id")
+    private Set<Integer> followings = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_followers",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "follower_id"))
-    private Set<User> followings = new HashSet<>();
+    // 只存储关注者的ID
+    @ElementCollection
+    @CollectionTable(name = "user_followers_ids", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "follower_id")
+    private Set<Integer> followers = new HashSet<>();
 
 
 
@@ -82,8 +84,9 @@ public class User {
         userVO.setPassword(this.password);
         userVO.setCreateTime(this.createTime);
         userVO.setNickname(this.nickName);
-
-
+        // 将关注的用户ID和关注者ID传递到UserVO中
+        userVO.setFollowing(this.followings);
+        userVO.setFollowers(this.followers);
         return userVO;
     }
 }

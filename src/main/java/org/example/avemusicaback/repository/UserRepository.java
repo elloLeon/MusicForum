@@ -16,9 +16,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findUserByTelephone(String telephone);
 
-    List<User> findByFollowings_Id(Integer followedId);
-    List<User> findByFollowers_Id(Integer followerId);
-
 
 
 

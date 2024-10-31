@@ -52,7 +52,9 @@ public class UserVO {
         user.setPassword(this.password);
         user.setCreateTime(this.createTime);
         user.setNickName(this.nickname);
-
+        // 将关注的用户ID和关注者ID传递到User中
+        user.setFollowings(new HashSet<>(this.following));
+        user.setFollowers(new HashSet<>(this.followers));
         return user;
     }
 }
