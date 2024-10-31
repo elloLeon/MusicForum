@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserService {
     Boolean register(UserVO userVO);
 
-    User getConcernInfo(String username);
+
     String login(String phone,String password);
 
     UserVO getInformation();
@@ -24,9 +24,5 @@ public interface UserService {
 
     Boolean changePassword(String oldPassword, String newPassword);
 
-    Boolean followUser(Integer followerId, Integer followedId);
-    List<Integer> getFollowings(Integer userId);
-    List<Integer> getFollowers(Integer userId);
-    Boolean unfollowUser(Integer followerId, Integer followedId);
 
 }

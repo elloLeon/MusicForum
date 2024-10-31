@@ -43,11 +43,6 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    @Override
-    public User getConcernInfo(String username) {
-        return userRepository.findByUsername(username);
-    }
-
 
     @Override
     public String login(String username, String password) {
@@ -121,36 +116,5 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return true;
     }
-    @Override
-    public Boolean followUser(Integer followerId, Integer followedId) {
-        User follower = userRepository.findById(followerId).orElseThrow();
-        User followed = userRepository.findById(followedId).orElseThrow();
 
-        follower.getFollowings().add(followed.getId());
-        followed.getFollowers().add(follower.getId());
-
-        userRepository.save(follower);
-        userRepository.save(followed);
-        return true;
-    }
-    @Override
-    public Boolean unfollowUser(Integer followerId, Integer followedId) {
-        User follower = userRepository.findById(followerId).orElseThrow();
-        User followed = userRepository.findById(followedId).orElseThrow();
-
-        follower.getFollowings().remove(followed.getId());
-        followed.getFollowers().remove(follower.getId());
-
-        userRepository.save(follower);
-        userRepository.save(followed);
-        return true;
-    }
-    @Override
-    public List<Integer> getFollowings(Integer userId) {
-        return new ArrayList<>(userRepository.findById(userId).orElseThrow().getFollowings());
-    }
-    @Override
-    public List<Integer> getFollowers(Integer userId) {
-        return new ArrayList<>(userRepository.findById(userId).orElseThrow().getFollowers());
-    }
 }
