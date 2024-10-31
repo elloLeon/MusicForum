@@ -52,29 +52,6 @@ public class UserController {
         return ResultVO.buildSuccess(userService.changePassword(oldPassword,newPassword));
 
     }
-    @PostMapping("/follow")
-    public ResultVO<Boolean> follow(@RequestParam("followerId") Integer followerId, @RequestParam("followedId") Integer followedId) {
-        return ResultVO.buildSuccess(userService.followUser(followerId, followedId));
-    }
 
-    @PostMapping("/unfollow")
-    public ResultVO<Boolean> unfollow(@RequestParam("followerId") Integer followerId, @RequestParam("followedId") Integer followedId) {
-        return ResultVO.buildSuccess( userService.unfollowUser(followerId, followedId));
-    }
-
-    @GetMapping("/following")
-    public ResultVO<List<Integer>> getFollowing(@RequestParam("id") Integer id) {
-        return ResultVO.buildSuccess(  userService.getFollowings(id));
-    }
-
-    @GetMapping("/followers")
-    public ResultVO<List<Integer>> getFollowers(@RequestParam("id")Integer id) {
-        return   ResultVO.buildSuccess( userService.getFollowers(id));
-    }
-
-    @GetMapping("/getConcernInfo")
-    public ResultVO<User> getConcernInfo(@RequestParam("username")String username){
-        return ResultVO.buildSuccess(userService.getConcernInfo(username));
-    }
 
 }

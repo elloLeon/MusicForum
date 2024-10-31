@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean register(UserVO userVO) {
-        User user = userRepository.findUserByTelephone(userVO.getTelephone());
+        User user = userRepository.findByUsername(userVO.getUsername());
 
         if (user != null) {
             throw AveMusicaException.userAlreadyExists();
