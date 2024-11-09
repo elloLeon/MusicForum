@@ -1,8 +1,10 @@
 package org.example.avemusicaback.serviceImpl;
 
+import org.example.avemusicaback.Util.SecurityUtil;
 import org.example.avemusicaback.po.User;
 import org.example.avemusicaback.repository.UserRepository;
 import org.example.avemusicaback.service.ConcernService;
+import org.example.avemusicaback.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ import java.util.List;
 public class ConsernServiceImpl implements ConcernService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    SecurityUtil securityUtil;
     @Override
     public Boolean followUser(Integer followerId, Integer followedId) {
         User follower = userRepository.findById(followerId).orElseThrow();
@@ -37,12 +42,24 @@ public class ConsernServiceImpl implements ConcernService {
         return true;
     }
     @Override
-    public List<Integer> getFollowings(Integer userId) {
-        return new ArrayList<>(userRepository.findById(userId).orElseThrow().getFollowings());
+    public List<UserVO> getFollowings() {
+        User user = securityUtil.getCurrentUser();
+        List<UserVO> userList = new ArrayList<>();
+        for (Integer i:user.getFollowings())
+        {
+            userList.add(userRepository.findUserById(i).toVO());
+        }
+        return userList;
     }
     @Override
-    public List<Integer> getFollowers(Integer userId) {
-        return new ArrayList<>(userRepository.findById(userId).orElseThrow().getFollowers());
+    public List<User> getFollowers() {
+        User user = securityUtil.getCurrentUser();
+        List<User> userList = new ArrayList<>();
+        for (Integer i:user.getFollowers())
+        {
+            userList.add(userRepository.findUserById(i));
+        }
+        return userList;
     }
     @Override
     public User getConcernInfo(String username) {

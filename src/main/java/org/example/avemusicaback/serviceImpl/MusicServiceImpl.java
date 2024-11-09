@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,5 +71,15 @@ public class MusicServiceImpl implements MusicService {
         return page.getContent().stream()
                 .map(Music::toVO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MusicVO> getMusicList(String username) {
+        List<MusicVO> musicVOList = new ArrayList<>();
+        for (Music music:musicRepository.findAllByUsername(username))
+        {
+            musicVOList.add(music.toVO());
+        }
+        return musicVOList;
     }
 }

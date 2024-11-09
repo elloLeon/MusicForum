@@ -26,4 +26,6 @@ public interface MusicService {
     @Cacheable(value = "allStoreCache_content", key = "#pageable")
     @Transactional
     List<MusicVO> getAllMusicInPageAsList(Pageable pageable);
+
+    List<MusicVO> getMusicList(String username);
 }
